@@ -159,10 +159,14 @@ namespace ReplayLauncher
 
         public bool IsServiceRunning(string service)
         {
-            ServiceController sc = new ServiceController(service);
-            bool running = sc.Status == ServiceControllerStatus.Running;
-            sc.Dispose();
-            return running;
+            try
+            {
+                ServiceController sc = new ServiceController(service);
+                bool running = sc.Status == ServiceControllerStatus.Running;
+                sc.Dispose();
+                return running;
+            }
+            catch { return false; }
         }
     }
 }
